@@ -1,0 +1,262 @@
+%%%%%%%%%%%%% Doing my own template
+%%%%%%%%%%%%% Following the specifications of
+% http://bu.univ-amu.libguides.com/c.php?g=511743&p=4025195
+%%%%%%%%%%%%% Sober amu thesis template
+
+% LAYOUT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Using the report class
+\documentclass[12pt, 			% Recommended
+               singlespacing,         % SHOULD BE
+               %singlespacing
+			  ]{report}
+
+%%% Margins
+\usepackage[a4paper,
+			%width=150mm,
+			top=30mm,
+			bottom=30mm,
+            right=30mm,
+            left=30mm,
+            % Offset to bind pages
+            bindingoffset=6mm,  
+            % To make room for the header
+            headheight=20mm,    
+           ]{geometry}
+
+% Line spacing - 1 is normal, 1.3 is onehalf and 1.6 is double spacing
+\linespread{1}
+
+%%% Change titles & stuff
+\makeatletter
+\renewcommand{\@chapapp}{Section}
+\makeatother
+\renewcommand{\abstractname}{Résumé}
+\renewcommand{\contentsname}{Table des matières}
+\renewcommand{\appendixname}{Table des annexes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Miscellaneous packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Really basic packages here to handle languages
+\usepackage[english, french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% The font
+\usepackage{concmath}
+% Highlight stuff for revisions + colors and units
+\usepackage{color}
+\usepackage[x11names]{xcolor}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb, bm}
+\usepackage[squaren, Gray, cdot]{SIunits}
+
+\usepackage{listings}
+
+% Where your pictures are
+\graphicspath{ {pics/} }
+
+%%% Header & Footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO,LE]{\rightmark}
+\fancyfoot{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[CE,CO]{\leftmark}
+\fancyfoot[RE,LO]{Endless Space 2}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Some symbols
+\usepackage{textcomp}
+
+% To include pdfs, like articles, directly
+\usepackage{pdfpages}            
+
+% For figures
+\usepackage{caption}
+\usepackage{subcaption}
+
+% For text boxes spanning multiple pages
+% And to add a color to it
+\usepackage{framed}
+% Access the different colors here
+% http://mirrors.standaloneinstaller.com/ctan/macros/latex/contrib/xcolor/xcolor.pdf page 40
+\colorlet{shadecolor}{LightSteelBlue1}
+\colorlet{framecolor}{Blue4}
+
+% New environment for shaded frames
+\newenvironment{frshaded}{%
+\def\FrameCommand{
+\fboxrule=\FrameRule
+\fboxsep=\FrameSep
+\fcolorbox{framecolor}{shadecolor}
+}%
+\MakeFramed {\FrameRestore}}%
+{\endMakeFramed}
+% Use like this
+%\begin{frshaded}
+%\end{frshaded}
+
+% To make todo notes, exemple in the intro
+\usepackage[textwidth=3cm]{todonotes}
+
+% For appendices
+\usepackage[toc,page]{appendix}
+% And change the names
+\renewcommand{\appendixname}{Annexe}
+\renewcommand{\appendixtocname}{Annexes}
+\renewcommand{\appendixpagename}{Annexes}
+
+% Line breaks in text
+% Warning: should find something better for urls >.<
+\sloppy
+
+% Add quotes
+\usepackage{dirtytalk}
+
+% Fancy tables
+\usepackage{multirow}
+
+% Urls
+\usepackage{url}
+
+% for pdf docs to read on computers
+% use this when compiling the pdf version (to send by mail)
+% comment it when you want to print it
+\usepackage{hyperref}
+
+% Package only for the template
+\usepackage{lipsum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Glossary %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% if you need a glossary
+% \usepackage{glossaries}         
+% \makeglossaries
+
+% \newglossaryentry{ABF}{name=ABF, description={Adaptive Biasing Force}}
+
+% Use \newglossaryentry{utc}{name=UTC, description={Coordinated Universal Time}} to add a glossary entry within the document
+% Use gls{utc} to use that entry somewhere
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Required to generate language-dependent quotes in the bibliography
+\usepackage[autostyle=true]{csquotes}
+
+% Use biber - way better than bibtex
+\usepackage[backend=biber,
+% 			citestyle=numeric-comp,
+%             bibstyle=numeric,
+            citestyle=authoryear,
+            bibstyle=authoryear,
+            %dashed=false,
+            sorting=nyt,
+            natbib=true,
+            doi=true,
+            url=false,
+            isbn=false,
+            eprint=false,
+            giveninits=true,
+            uniquename=init,
+            maxcitenames=1, 
+            minbibnames=6, 
+            maxbibnames=6
+            ]{biblatex}
+
+% The filename of the bibliography
+\addbibresource{all.bib} 
+% To escape some underscores in the .bib exported from mendeley
+\DeclareSourcemap{ % Used when .bib/Bibliography is compiled, not when document is
+    \maps{
+        \map{ % Replaces '{\_}', '{_}' or '\_' with just '_'
+            \step[fieldsource=url,
+                  match=\regexp{\{\\\_\}|\{\_\}|\\\_},
+                  replace=\regexp{\_}]
+        }
+        \map{ % Replaces '{'$\sim$'}', '$\sim$' or '{~}' with just '~'
+            \step[fieldsource=url,
+                  match=\regexp{\{\$\\sim\$\}|\{\~\}|\$\\sim\$},
+                  replace=\regexp{\~}]
+        }
+        \map{ % Replaces '{\_}', '{_}' or '\_' with just '_'
+            \step[fieldsource=doi,
+                  match=\regexp{\{\\\_\}|\{\_\}|\\\_},
+                  replace=\regexp{\_}]
+        }
+        \map{ % Replaces '{'$\sim$'}', '$\sim$' or '{~}' with just '~'
+            \step[fieldsource=doi,
+                  match=\regexp{\{\$\\sim\$\}|\{\~\}|\$\\sim\$},
+                  replace=\regexp{\~}]
+        }
+    }
+}
+
+% Start with roman numbers until the introduction
+\pagenumbering{roman}
+
+% handle the abbverviations ?
+% Basic abbreviation page here, you can play around with the two "5cm"
+% To increase or decrease the spacing between the abbreviation and the words
+\usepackage{calc}
+\makeatletter
+\newcommand{\tocfill}{\cleaders\hbox{$\m@th \mkern\@dotsep mu . \mkern\@dotsep mu$}\hfill}
+\makeatother
+\newcommand{\abbrlabel}[1]{\makebox[5cm][l]{\textbf{#1}\ \tocfill}}
+\newenvironment{abbreviations}{\begin{list}{}{\renewcommand{\makelabel}{\abbrlabel}%
+        \setlength{\labelwidth}{5cm}\setlength{\leftmargin}{\labelwidth+\labelsep}%
+                                              \setlength{\itemsep}{0pt}}}{\end{list}}
+                                              
+% crossed text, if you need it
+\usepackage[normalem]{ulem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%% Title page
+\input{chapters/title}
+
+% %%% Abstract
+
+
+
+
+\tableofcontents
+
+\listoffigures
+
+
+
+% MAIN TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% normal numbering from here
+\pagenumbering{arabic}
+
+%%%% Each chapter is in a different file
+%% In the [], how the chapter will be called in the table of contents
+%% In the {}, the name of the chapter in the text
+%% The chaptermark is the name of the chapter in the footer
+%%% You want a small enough chaptermark or it will overflow to the sides
+
+
+
+
+\chapter[Présentation]{Présentation}
+\chaptermark{Présentation}
+\input{chapters/Présentation}
+
+
+%%%% Bibliography before appendices
+%%%% After the initial round, you need to fix it by hand depending on where you generate your .bib file from
+%%%% Mendeley often messes with italics and accents for instance
+
+
+\end{document}
