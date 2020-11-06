@@ -23,11 +23,5 @@ int main(int argc,char* argv[])
         std::cout << "Wrong command" << std::endl ;
     }
     return 0;
-    
-    Exemple exemple;
-    exemple.setX(53);
 
-    cout << "It works !" << endl;
-
-    return 0;
 }

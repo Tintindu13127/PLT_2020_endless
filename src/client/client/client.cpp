@@ -2,15 +2,6 @@
 #include <string.h>
 #include "dia2code_files/Ressource.h"
 
-int hello(int argc, char* argv[]){
-    if (strcmp(argv[1],"hello")==0){
-        std::cout << "Woaw, quel code" << std::endl;
-    }
-    else {
-        std::cout << "Wrong command" << std::endl ;
-    }
-    return 0;
-}
 
 namespace state{
 
