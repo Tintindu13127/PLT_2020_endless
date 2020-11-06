@@ -9,13 +9,21 @@ void testSFML() {
 
 // Fin test SFML
 
-#include <state.h>
+#include <State.h>
 
 using namespace std;
 using namespace state;
 
 int main(int argc,char* argv[])
 {
+    if (strcmp(argv[1],"hello")==0){
+        std::cout << "Woaw, quel code" << std::endl;
+    }
+    else {
+        std::cout << "Wrong command" << std::endl ;
+    }
+    return 0;
+    
     Exemple exemple;
     exemple.setX(53);
 
