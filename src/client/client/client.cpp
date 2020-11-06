@@ -3,7 +3,7 @@
 #include "dia2code_files/Ressource.h"
 
 
-namespace state{
+/*namespace state{
 
 void Ressource::setTech(int tech){
     this->technologie=tech;
@@ -21,4 +21,4 @@ void Ressource::setFood(int food){
     this->food=food;
 }
 
-}
+}*/
