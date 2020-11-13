@@ -9,6 +9,8 @@ Ship::~Ship() {}
 int Ship::getLevel() const { return level; }
 void Ship::setLevel(int level) { this->level = level ;}
 
+Ship:
+
 
 void Ship::attack() {}
 
@@ -18,7 +20,7 @@ void Ship::LevelUp() { }
 
 /*void Ship::setX (int x) {
     this->x = x;
-}
-
 }*/
+
+
 
