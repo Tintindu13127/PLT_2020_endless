@@ -2,8 +2,17 @@
 
 using namespace state;
 
+int sysID = 0;
+
 //Constructeur + destructeur
-StellarSystem::StellarSystem() {}
+StellarSystem::StellarSystem() {
+	this->nb_planets = 1;
+	this->IsCaptured = false;
+	this->systemID = sysID;
+	sysID = sysID + 1;
+	// this->planet_list.push_back(new_planet); ajouter au constructeur un argument planet ?
+	// this->building_list.push_back(new_building); same
+}
 
 StellarSystem::~StellarSystem() {}
 

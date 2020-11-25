@@ -22,5 +22,5 @@ void State::setPlayer_b(const Player& player_b) {
 }
 
 int State::getTurn() const {
-	
+	return this->turn;
 }
