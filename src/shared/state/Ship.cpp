@@ -56,8 +56,14 @@ void Ship::setShip_stats(const ShipStats& ship_stats) {
 }
 
 // Operations
-void receiveDamages(int damage_point) {
-	this->setShip_stats.health = this->setShip_stats.health - 1;
+void Ship::receiveDamages(int damage_point) {
+	int hp = this->ship_stats.health ;
+	if (hp<damage_point){
+		printf("Ship destroyed");
+	}
+	else {
+		
+	}
 }
 void Ship::attack(Ship* ship_target) {
 
