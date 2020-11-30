@@ -8,11 +8,9 @@ void testSFML() {
 }
 
 // Fin test SFML
-
-//#include <State.h>
-
+#include "state.h"
+using namespace state;
 using namespace std;
-//using namespace state;
 
 int main(int argc,char* argv[])
 {

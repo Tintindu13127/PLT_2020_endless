@@ -4,6 +4,8 @@
 using namespace std;
 using namespace state;
 
+Ship::Ship(){}
+
 Ship::Ship(Ship_TypeID ship) {
 	this->price = 10;
 	this->production_cost = 10;
@@ -58,10 +60,11 @@ void Ship::setShip_stats(const ShipStats& ship_stats) {
 }
 
 // Operations
-void Ship::receiveDamages(int damage_point) {
+void Ship::receiveDamages(int damage_point) { // TO DO utiliser une exception au moment de la destruction
 	int hp = this->ship_stats.health ;
 	if (hp<damage_point){
-		cout <<"Ship destroyed" << endl;
+		cout <<"Ship must be destroyed" << endl;
+		this->ship_stats.health = 0;
 	}
 	else {
 		this->ship_stats.health = hp - damage_point;

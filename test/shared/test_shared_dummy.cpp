@@ -13,8 +13,8 @@ BOOST_AUTO_TEST_CASE(TestState)
 {
 
 	// Ship
-	Ship* ship_1;
-	Ship* ship_2;
+	auto ship_1 = new Ship();
+	auto ship_2 = new Ship();
 
 	// Level setter
 	int level = 1;
@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(TestState)
     ship_1->setShip_stats(stats);
     BOOST_CHECK_EQUAL(ship_1->getShip_stats().attack_point, stats.attack_point); 
     BOOST_CHECK_EQUAL(ship_1->getShip_stats().defense_point, stats.defense_point); 
-    BOOST_CHECK_EQUAL(ship_1->getShip_stats().health, stats.attack_point); 
+    BOOST_CHECK_EQUAL(ship_1->getShip_stats().health, stats.health); 
     BOOST_CHECK_EQUAL(ship_1->getShip_stats().movement_point, stats.movement_point); 
 
 	ShipStats stats_2;
@@ -57,8 +57,8 @@ BOOST_AUTO_TEST_CASE(TestState)
 
 	// Attack method
 	ship_1->attack(ship_2);
-    BOOST_CHECK_EQUAL(ship_1->getShip_stats().health, stats.health); 
-    BOOST_CHECK_EQUAL(ship_2->getShip_stats().health, stats_2.health); 
+    BOOST_CHECK_EQUAL(ship_1->getShip_stats().health, 5); 
+    BOOST_CHECK_EQUAL(ship_2->getShip_stats().health, 5); 
 
 	// LevelUp method
 	ship_1->LevelUp();
