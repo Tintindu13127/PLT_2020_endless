@@ -16,9 +16,12 @@ using namespace std;
 
 int main(int argc,char* argv[])
 {
-    if (strcmp(argv[1],"hello")==0){
+    if (strcmp(argv[1],"hello") ==0 ){
         std::cout << "Woaw, quel code" << std::endl;
     }
+	else if (strcmp(argv[1],"state") == 0){
+		std::cout << "State" << std::endl;
+	}
     else {
         std::cout << "Wrong command" << std::endl ;
     }

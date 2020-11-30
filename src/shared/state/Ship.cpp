@@ -1,5 +1,7 @@
 #include "Ship.h"
+#include <iostream>
 
+using namespace std;
 using namespace state;
 
 Ship::Ship(Ship_TypeID ship) {
@@ -59,14 +61,21 @@ void Ship::setShip_stats(const ShipStats& ship_stats) {
 void Ship::receiveDamages(int damage_point) {
 	int hp = this->ship_stats.health ;
 	if (hp<damage_point){
-		printf("Ship destroyed");
+		cout <<"Ship destroyed" << endl;
 	}
 	else {
-		
+		this->ship_stats.health = hp - damage_point;
 	}
 }
-void Ship::attack(Ship* ship_target) {
 
+void Ship::attack(Ship* ship_target) {
+	int damage_target;
+	int damage_attacker;
+	damage_target = this->ship_stats.attack_point - ship_target->ship_stats.defense_point;
+	damage_attacker = ship_target->ship_stats.attack_point - this->ship_stats.defense_point; 
+
+	ship_target->receiveDamages(damage_target);
+	this->receiveDamages(damage_attacker);
 }
 
 void Ship::moveShip(){}
