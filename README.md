@@ -74,7 +74,7 @@ $ ./bin/client hello
 
 Print a rendering
 ```sh
-$ ./bin/client hello
+$ ./bin/client render
 ```
 
 <!-- RELEASE HISTORY-->
