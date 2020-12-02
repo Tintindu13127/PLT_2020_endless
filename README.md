@@ -54,12 +54,11 @@ $ apt-get install python python3 libmicrohttpd-dev lcov libsfml-dev gcc cmake ma
 1. Clone the repo
 ```sh
 git clone https://github.com/Tintindu13127/PLT_2020_endless
-cd PLT_2021
+cd PLT_2020_endless
 ```
 
 2. Build it
 ```sh
-$ cd plt
 $ mkdir build
 $ cd build
 $ cmake .. && make
