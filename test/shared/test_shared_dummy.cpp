@@ -1,6 +1,8 @@
 
 #include <boost/test/unit_test.hpp>
 #include "../../src/shared/state/Ship.h"
+#include "../../src/shared/state/StellarSystem.h"
+
 
 using namespace ::state;
 
@@ -13,7 +15,7 @@ BOOST_AUTO_TEST_CASE(TestState)
 {
 
 	// Ship
-	auto ship_1 = new Ship();
+	auto ship_1 = new Ship(); // equivalent à Ship* ship_1 = new Ship();
 	auto ship_2 = new Ship();
 
 	// Level setter
@@ -63,6 +65,37 @@ BOOST_AUTO_TEST_CASE(TestState)
 	// LevelUp method
 	ship_1->LevelUp();
 	BOOST_CHECK_EQUAL(ship_1->getLevel(), 2);
+
+
+	//StellarSystem
+	auto system = new StellarSystem();
+
+	//Nb_planets setter
+	int nb_planets = 2;
+	system->setNb_planets(nb_planets);
+	BOOST_CHECK_EQUAL(system->getNb_planets(), nb_planets);
+
+	//Owner setter
+	const std::string owner = "Hugo";
+	system->setOwner(owner);
+	BOOST_CHECK_EQUAL(system->getOwner(), owner);
+
+	//IsCaptured setter
+	bool isCaptured = false;
+	system->setIsCaptured(isCaptured);
+	BOOST_CHECK_EQUAL(system->getIsCaptured(), isCaptured);
+
+	//SystemID setter
+	int systemID = 4;
+	system->setSystemID(systemID);
+	BOOST_CHECK_EQUAL(system->getSystemID(), systemID);
+
+	//Planet_list setter
+	auto planet1 = new Planet();
+	auto planet2 = new Planet();
+	const std::vector<Planet>& planet_list = {planet1, planet2};
+	system->setPlanet_list(planet_list);
+	//BOOST_CHECK_EQUAL(system->getPlanet_list(), planet_list);
 
 }
  /*vim: set sw=2 sts=2 et : */
