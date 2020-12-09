@@ -91,16 +91,21 @@ BOOST_AUTO_TEST_CASE(TestState)
 	BOOST_CHECK_EQUAL(system->getSystemID(), systemID);
 
 	//Planet_list setter
+	auto planet0 = new Planet();
 	auto planet1 = new Planet();
-	auto planet2 = new Planet();
-	const std::vector<Planet>& planet_list = {planet1, planet2};
+	const std::vector<Planet>& planet_list = {planet0, planet1};
 	system->setPlanet_list(planet_list);
 	const std::vector<Planet>& planet_list_getted = system->getPlanet_list();
-//	BOOST_CHECK_EQUAL(planet_list_getted[0], *planet1);
-	//BOOST_CHECK(planet_list_getted[1] == planet2);
+//	int id = planet_list_getted[1].getPlanetID();
+	BOOST_CHECK_EQUAL(0, planet0->getPlanetID());
+	BOOST_CHECK_EQUAL(1, planet1->getPlanetID());
+
+
+	BOOST_CHECK_EQUAL(planet_list_getted[0].getPlanetID(), planet0->getPlanetID());
+	BOOST_CHECK_EQUAL(planet_list_getted[1].getPlanetID(), planet1->getPlanetID());
 
 	//add Planet to Planet_list
-	auto planet3 = new Planet();
-	system->add_planet_list(*planet3);
+	auto planet2 = new Planet();
+	system->add_planet_list(*planet2);
 }
  /*vim: set sw=2 sts=2 et : */

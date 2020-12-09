@@ -2,12 +2,11 @@
 
 using namespace state;
 
-int uid=0;
+int Planet::instance_count =0;
 
 //Constructor + Destructor
 Planet::Planet() {
-	this->setPlanetID(uid);
-	uid++;
+	this->planetID = instance_count++;
 }
 Planet::~Planet() {}
 
