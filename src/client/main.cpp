@@ -23,14 +23,13 @@ using namespace client;
 
 
 // Fin test SFML
-
-//#include <State.h>
-
+#include "state.h"
+using namespace state;
 using namespace std;
-//using namespace state;
 
 int main(int argc,char* argv[])
 {
+<<<<<<< HEAD
 	if (strcmp(argv[1],"hello")==0){
         	std::cout << "Woaw, quel code" << std::endl;
     	}
@@ -54,6 +53,18 @@ int main(int argc,char* argv[])
             }
             
             render::StateLayer update();
+=======
+    if (strcmp(argv[1],"hello") ==0 ){
+        std::cout << "Woaw, quel code" << std::endl;
+    }
+	else if (strcmp(argv[1],"state") == 0){
+		std::cout << "State" << std::endl;
+	}
+    else {
+        std::cout << "Wrong command" << std::endl ;
+    }
+    return 0;
+>>>>>>> af52b5cd7c2cb5eabd7fd1db28d7f1bb8087310c
 
 
           }

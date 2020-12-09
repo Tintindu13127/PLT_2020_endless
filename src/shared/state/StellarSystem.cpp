@@ -65,14 +65,14 @@ void StellarSystem::setBuilding_list(const std::vector<Building>& building_list)
 // Fonction pour le render ?
 //void see_stellarsys() {}
 
-bool StellarSystem::colonize(Planet *planet) {
+/*bool StellarSystem::colonize(Planet *planet) {
 	if (planet->get_statut() != 1) {
 		return false;
 	}
 	else {
 		return true;
 	}
-}
+} A DECOMMENTER QUAND PLANET.CPP EST GOOD*/
 
 //Pas sûr que ce soit nécessaire
 //bool upgradeBuilding (Building building) {}
