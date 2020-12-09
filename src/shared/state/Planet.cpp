@@ -6,7 +6,8 @@ int uid=0;
 
 //Constructor + Destructor
 Planet::Planet() {
-
+	this->setPlanetID(uid);
+	uid++;
 }
 Planet::~Planet() {}
 

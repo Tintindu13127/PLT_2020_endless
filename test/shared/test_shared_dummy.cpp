@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_CASE(TestState)
 	auto planet2 = new Planet();
 	const std::vector<Planet>& planet_list = {planet1, planet2};
 	system->setPlanet_list(planet_list);
-//	const std::vector<Planet>& planet_list_getted = system->getPlanet_list();
+	const std::vector<Planet>& planet_list_getted = system->getPlanet_list();
 //	BOOST_CHECK_EQUAL(planet_list_getted[0], *planet1);
 	//BOOST_CHECK(planet_list_getted[1] == planet2);
 
