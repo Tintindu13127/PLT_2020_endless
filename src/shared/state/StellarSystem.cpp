@@ -62,6 +62,10 @@ void StellarSystem::setBuilding_list(const std::vector<Building>& building_list)
 
 //Autres méthodes
 
+void StellarSystem::add_planet_list(Planet planet) {
+	this->planet_list.push_back(planet);
+}
+
 // Fonction pour le render ?
 //void see_stellarsys() {}
 
