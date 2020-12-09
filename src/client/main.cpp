@@ -3,9 +3,24 @@
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
 
-void testSFML() {
+void testSFML()
+{
     sf::Texture texture;
 }
+// Fin test SFML
+
+#include <state.h>
+#include "render.h"
+
+
+#include "client.h"
+#include <iostream>
+#include <unistd.h>
+using namespace std;
+using namespace state;
+using namespace render;
+using namespace client;
+
 
 // Fin test SFML
 #include "state.h"
@@ -25,4 +40,10 @@ int main(int argc,char* argv[])
     }
     return 0;
 
+
+
+          }
+  }
+    return 0;
+}
 }
