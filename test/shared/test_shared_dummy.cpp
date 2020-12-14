@@ -96,10 +96,6 @@ BOOST_AUTO_TEST_CASE(TestState)
 	std::vector<Planet> planet_list	= {planet0, planet1};
 	system->setPlanet_list(planet_list);
 	const std::vector<Planet>& planet_list_getted = system->getPlanet_list();
-//	int id = planet_list_getted[1].getPlanetID();
-	BOOST_CHECK_EQUAL(0, planet0.getPlanetID());
-	BOOST_CHECK_EQUAL(1, planet1.getPlanetID());
-
 
 	BOOST_CHECK_EQUAL(planet_list_getted[0].getPlanetID(), planet0.getPlanetID());
 	BOOST_CHECK_EQUAL(planet_list_getted[1].getPlanetID(), planet1.getPlanetID());
@@ -108,5 +104,23 @@ BOOST_AUTO_TEST_CASE(TestState)
 	Planet planet2;
 	system->add_planet_list(planet2);
     BOOST_CHECK_EQUAL(planet_list_getted[2].getPlanetID(), 2);
+	//Colonize()
+	BOOST_CHECK_EQUAL(planet0.getStatut(), true);
+	
+	//Building_list setter
+	Building building0;
+	Building building1;
+	std::vector<Building> building_list	= {building0, building1};
+	system->setBuilding_list(building_list);
+	const std::vector<Building>& building_list_getted = system->getBuilding_list();
+	BOOST_CHECK_EQUAL(building_list_getted[0].getBuildingID(), building0.getBuildingID());
+	BOOST_CHECK_EQUAL(building_list_getted[1].getBuildingID(), building1.getBuildingID());
+
+	//add Planet by buy_building() method
+	Building building2;
+	system->buy_building(building2);
+    BOOST_CHECK_EQUAL(building_list_getted[2].getBuildingID(), 2);
+
+	
 }
  /*vim: set sw=2 sts=2 et : */

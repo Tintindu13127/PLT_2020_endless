@@ -2,14 +2,13 @@
 
 using namespace state;
 
-int sysID = 0;
+int StellarSystem::instance_count = 0;
 
 //Constructeur + destructeur
 StellarSystem::StellarSystem() {
 	this->nb_planets = 1;
 	this->IsCaptured = false;
-	this->systemID = sysID;
-	sysID = sysID + 1;
+	this->systemID = instance_count++;
 	// this->planet_list.push_back(new_planet); ajouter au constructeur un argument planet ?
 	// this->building_list.push_back(new_building); same
 }
@@ -66,17 +65,22 @@ void StellarSystem::add_planet_list(Planet planet) {
 	this->planet_list.push_back(planet);
 }
 
+void StellarSystem::buy_building(Building building) {
+	this->building_list.push_back(building);
+	// faire perdre de l'argent au joueur
+}
+
 // Fonction pour le render ?
 //void see_stellarsys() {}
 
-/*bool StellarSystem::colonize(Planet *planet) {
-	if (planet->get_statut() != 1) {
+bool StellarSystem::colonize(Planet *planet) {
+	if (planet->getStatut() != 1) {
 		return false;
 	}
 	else {
 		return true;
 	}
-} A DECOMMENTER QUAND PLANET.CPP EST GOOD*/
+} 
 
 //Pas sûr que ce soit nécessaire
 //bool upgradeBuilding (Building building) {}

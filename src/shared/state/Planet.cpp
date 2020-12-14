@@ -7,6 +7,8 @@ int Planet::instance_count =0;
 //Constructor + Destructor
 Planet::Planet() {
 	this->planetID = instance_count++;
+	StatutID statut = (StatutID)1 ;
+	this->statut = statut;
 }
 Planet::~Planet() {}
 
