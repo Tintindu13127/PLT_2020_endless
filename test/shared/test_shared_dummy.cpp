@@ -2,6 +2,7 @@
 #include <boost/test/unit_test.hpp>
 #include "../../src/shared/state/Ship.h"
 #include "../../src/shared/state/StellarSystem.h"
+#include "../../src/shared/state/Player.h"
 
 
 using namespace ::state;
@@ -165,6 +166,26 @@ BOOST_AUTO_TEST_CASE(TestState)
 	int turn = building0.turnLeft();
 	BOOST_CHECK_EQUAL(turn, 0);
 
-	
+//--------------------------------------------------------
+//					Ressource
+//--------------------------------------------------------
+	//Constructeur initial, il appelle les setters, permet de tester donc setters et getters
+	Ressource *ressource_init = new Ressource(10,2,2,1); //auto *ressource_init...
+	BOOST_CHECK_EQUAL(ressource_init->getBrume(), 10);
+	BOOST_CHECK_EQUAL(ressource_init->getProd(), 2);
+	BOOST_CHECK_EQUAL(ressource_init->getScience(), 2);
+	BOOST_CHECK_EQUAL(ressource_init->getFood(), 1);
+
+	//
+
+
+//--------------------------------------------------------
+//					Player
+//--------------------------------------------------------
+	//Player Hugo;
+
+	//Ressources
+	//Hugo.setRessources()
+
 }
  /*vim: set sw=2 sts=2 et : */

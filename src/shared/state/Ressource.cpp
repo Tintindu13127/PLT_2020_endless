@@ -2,7 +2,15 @@
 
 using namespace state;
 
-Ressource::Ressource() {}
+Ressource::Ressource(){
+	
+}
+Ressource::Ressource(int brume, int prod, int science, int food) {
+	this->setBrume(brume);
+	this->setProd(prod);
+	this->setScience(science);
+	this->setFood(food);
+}
 Ressource::~Ressource() {}
 
 // Setter & Getters
