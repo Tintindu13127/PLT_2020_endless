@@ -14,7 +14,9 @@ BOOST_AUTO_TEST_CASE(TestStaticAssert)
 BOOST_AUTO_TEST_CASE(TestState)
 {
 
-	// Ship
+//--------------------------------------------------------
+//					Ship
+//--------------------------------------------------------	
 	auto ship_1 = new Ship(); // equivalent à Ship* ship_1 = new Ship();
 	auto ship_2 = new Ship();
 
@@ -66,8 +68,9 @@ BOOST_AUTO_TEST_CASE(TestState)
 	ship_1->LevelUp();
 	BOOST_CHECK_EQUAL(ship_1->getLevel(), 2);
 
-
-	//StellarSystem
+//--------------------------------------------------------
+//					StellarSystem
+//--------------------------------------------------------	
 	auto system = new StellarSystem();
 
 	//Nb_planets setter
@@ -121,6 +124,31 @@ BOOST_AUTO_TEST_CASE(TestState)
 	system->buy_building(building2);
     BOOST_CHECK_EQUAL(building_list_getted[2].getBuildingID(), 2);
 
-	
+//--------------------------------------------------------
+//					Planet
+//--------------------------------------------------------	
+	//PlanetID
+	planet0.setPlanetID(20);
+	BOOST_CHECK_EQUAL(planet0.getPlanetID(), 20);
+
+	//Size_planet
+	SizeID size_planet = (SizeID)2;
+	planet0.setSize_p(size_planet);
+	BOOST_CHECK_EQUAL(planet0.getSize_p(), size_planet);
+
+	//planet_type
+	Type_planetID planet_type = (Type_planetID)3;
+	planet0.setType(planet_type);
+	BOOST_CHECK_EQUAL(planet0.getType(), planet_type);
+
+	//planet_statut
+	StatutID planet_statut = (StatutID)2;
+	planet0.setStatut(planet_statut);
+	BOOST_CHECK_EQUAL(planet0.getStatut(), planet_statut);
+
+//--------------------------------------------------------
+//					Building
+//--------------------------------------------------------	
+
 }
  /*vim: set sw=2 sts=2 et : */
