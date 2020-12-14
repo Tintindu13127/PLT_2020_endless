@@ -149,6 +149,22 @@ BOOST_AUTO_TEST_CASE(TestState)
 //--------------------------------------------------------
 //					Building
 //--------------------------------------------------------	
+	//building_price
+	building0.setPrice(5);
+	BOOST_CHECK_EQUAL(building0.getPrice(), 5);
 
+	//building_production
+	building0.setProduction(6);
+	BOOST_CHECK_EQUAL(building0.getProduction(), 6);
+
+	//buildingID
+	building0.setBuildingID(36);
+	BOOST_CHECK_EQUAL(building0.getBuildingID(), 36);
+
+	// turnLeft(), A MODIFIER QUAND ELLE SERA CODER
+	int turn = building0.turnLeft();
+	BOOST_CHECK_EQUAL(turn, 0);
+
+	
 }
  /*vim: set sw=2 sts=2 et : */
