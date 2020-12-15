@@ -66,12 +66,7 @@ bool Surface::loadShip(state::State& curState, render::TileSet& textureTileSet,i
     texture= textureTileSet.getTexture();
     int cellWidth= textureTileSet.getCellWidth();
     int cellHeight= textureTileSet.getCellHeight();
-    int nbPlyers= curState.getListPlayers().size();
-    int nbCharacters= curState.getListCharacters(0).size();
-    // each Player has the same nb of Character
-    int vertexArrayIndex=0;
     
-    quads.setPrimitiveType(sf::Quads);
     
     
     return true;
