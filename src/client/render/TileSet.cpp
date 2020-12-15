@@ -15,6 +15,18 @@ TileSet::TileSet(TileSetID ID){
             resFile="res/purple.png";
             
             break;
+	case SHIPTILESET:
+            cellWidth=32;
+            cellHeight=32;         
+            resFile="res/Spaceship.png";
+            
+            break;
+	case PLANETTILESET:
+            cellWidth=32;
+            cellHeight=32;         
+            resFile="res/Terran.png";
+            
+            break;
     }
 
     textureTileSet.loadFromFile(resFile);
