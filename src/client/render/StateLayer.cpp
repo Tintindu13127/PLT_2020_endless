@@ -10,11 +10,12 @@ using namespace std;
 using namespace state;
 
 
-StateLayer::StateLayer(state::State& myState, sf::RenderWindow& window,std::string mode):window(window),currentState(myState){
+StateLayer::StateLayer(state::State& myState, sf::RenderWindow& window):window(window),currentState(myState){
    
 
-   //TileSet tileSetMap(MAPTILESET,mode);
-   unique_ptr<TileSet>ptr_mapTileset(new TileSet(MAPTILESET,mode));
+   
+
+   unique_ptr<TileSet>ptr_mapTileset(new TileSet(MAPTILESET);
        
    tileSets.push_back(move(ptr_mapTileset));
    
@@ -23,24 +24,24 @@ StateLayer::StateLayer(state::State& myState, sf::RenderWindow& window,std::stri
 StateLayer::~StateLayer(){};
 
 
-void StateLayer::initTextureArea(state::State& myState){
-    TextureArea map;
+void StateLayer::initSurface(state::State& myState){
+    Surface map;
     map.loadTextures(myState,*tileSets[0],myState.getMap()[0].size(),myState.getMap().size());
-    unique_ptr<TextureArea> ptr_map(new TextureArea(map));
+    unique_ptr<Surface> ptr_map(new Surface(map));
         
-    if(textureAreas.size()!=0){
-		while(textureAreas.size()!=0){
-			textureAreas.pop_back();
+    if(Surface.size()!=0){
+		while(Surface.size()!=0){
+			Surface.pop_back();
 		}
 	}
-    textureAreas.push_back(move(ptr_map));
+    Surface.push_back(move(ptr_map));
 }
 
 void StateLayer::draw(sf::RenderWindow &window)
 {
     window.clear();
     // draw mapcells
-    window.draw(*textureAreas[0]);
+    window.draw(*Surface[0]);
     for (auto& m: message)
         window.draw(m);
     window.display();

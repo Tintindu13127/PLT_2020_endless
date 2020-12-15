@@ -5,7 +5,7 @@ using namespace render;
 
 // Constructor
 
-TileSet::TileSet(TileSetID ID,std::string mode){
+TileSet::TileSet(TileSetID ID){
     id = ID;
     
     switch(id){
