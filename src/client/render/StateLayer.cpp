@@ -1,38 +1,47 @@
-#include "StateLayer.h"
+#include "../render.h"
 #include <iostream>
-#include <fstream>
-#include <iomanip>
-// #include <SFML/Graphics.hpp>
-using namespace std;
+#include <unistd.h>
+#include <cmath>
+#include <queue>
+
+
 using namespace render;
+using namespace std;
 using namespace state;
 
 
-StateLayer:: StateLayer (state::Position const& position)
-	
-	
-	{
-		this->map.load("res/spaceship_1_preview.png",sf::Vector2u(16,16));
-		this->window = new sf::RenderWindow(sf::VideoMode(720,720), "One Upon A Wei",sf::Style::Close);
-		this->view = new  sf::View(sf::Vector2f(0.f, 10.f), sf::Vector2f(360.f, 360.f));
-		
+StateLayer::StateLayer(state::State& myState, sf::RenderWindow& window,std::string mode):window(window),currentState(myState){
+   
 
-		
+   //TileSet tileSetMap(MAPTILESET,mode);
+   unique_ptr<TileSet>ptr_mapTileset(new TileSet(MAPTILESET,mode));
+       
+   tileSets.push_back(move(ptr_mapTileset));
+   
+
+}
+StateLayer::~StateLayer(){};
+
+
+void StateLayer::initTextureArea(state::State& myState){
+    TextureArea map;
+    map.loadTextures(myState,*tileSets[0],myState.getMap()[0].size(),myState.getMap().size());
+    unique_ptr<TextureArea> ptr_map(new TextureArea(map));
+        
+    if(textureAreas.size()!=0){
+		while(textureAreas.size()!=0){
+			textureAreas.pop_back();
+		}
 	}
-
-
-void StateLayer :: update(){
-	this->window->clear();
-	
-	window->setView(*view);
-
-	this->window->draw(map);
-	
-	
-	this->window->display();
+    textureAreas.push_back(move(ptr_map));
 }
 
-void StateLayer :: end(){
-	this->window->close();
+void StateLayer::draw(sf::RenderWindow &window)
+{
+    window.clear();
+    // draw mapcells
+    window.draw(*textureAreas[0]);
+    for (auto& m: message)
+        window.draw(m);
+    window.display();
 }
-
