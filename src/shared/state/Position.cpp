@@ -5,8 +5,12 @@ using namespace state;
 // Constructeur & Destructeur
 
 Position::Position() {
-	this->X = 0;
-	this->Y = 0;
+	this->setX(0);
+	this->setY(0);
+}
+Position::Position(int x, int y){
+	this->setX(x);
+	this->setY(y);
 }
 Position::~Position(){}
 

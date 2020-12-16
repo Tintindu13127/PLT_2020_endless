@@ -4,6 +4,8 @@
 using namespace std;
 using namespace state;
 
+int Ship::instance_count = 0;
+
 Ship::Ship(){}
 
 Ship::Ship(Ship_TypeID ship) {
@@ -11,11 +13,19 @@ Ship::Ship(Ship_TypeID ship) {
 	this->production_cost = 10;
 	this->level = 0;
 	this->experience = 0;
+	this->shipID = instance_count++;
 }
 
 Ship::~Ship() {}
 
 //Setters & Getters
+
+int Ship::getShipID() const {
+	return this->shipID;
+}
+void Ship::setShipID(int shipID) {
+	this->shipID = shipID;
+}
 
 int Ship::getLevel() const { 
 	return level; 

@@ -3,6 +3,7 @@
 #include "../../src/shared/state/Ship.h"
 #include "../../src/shared/state/StellarSystem.h"
 #include "../../src/shared/state/Player.h"
+#include "../../src/shared/state/Objet.h"
 
 
 using namespace ::state;
@@ -99,15 +100,15 @@ BOOST_AUTO_TEST_CASE(TestState)
 	Planet planet1;
 	std::vector<Planet> planet_list	= {planet0, planet1};
 	system->setPlanet_list(planet_list);
-	const std::vector<Planet>& planet_list_getted = system->getPlanet_list();
+	const std::vector<Planet>& planet_list_gotten = system->getPlanet_list();
 
-	BOOST_CHECK_EQUAL(planet_list_getted[0].getPlanetID(), planet0.getPlanetID());
-	BOOST_CHECK_EQUAL(planet_list_getted[1].getPlanetID(), planet1.getPlanetID());
+	BOOST_CHECK_EQUAL(planet_list_gotten[0].getPlanetID(), planet0.getPlanetID());
+	BOOST_CHECK_EQUAL(planet_list_gotten[1].getPlanetID(), planet1.getPlanetID());
 
 	//add Planet to Planet_list
 	Planet planet2;
 	system->add_planet_list(planet2);
-    BOOST_CHECK_EQUAL(planet_list_getted[2].getPlanetID(), 2);
+    BOOST_CHECK_EQUAL(planet_list_gotten[2].getPlanetID(), 2);
 	//Colonize()
 	BOOST_CHECK_EQUAL(planet0.getStatut(), true);
 	
@@ -116,14 +117,14 @@ BOOST_AUTO_TEST_CASE(TestState)
 	Building building1;
 	std::vector<Building> building_list	= {building0, building1};
 	system->setBuilding_list(building_list);
-	const std::vector<Building>& building_list_getted = system->getBuilding_list();
-	BOOST_CHECK_EQUAL(building_list_getted[0].getBuildingID(), building0.getBuildingID());
-	BOOST_CHECK_EQUAL(building_list_getted[1].getBuildingID(), building1.getBuildingID());
+	const std::vector<Building>& building_list_gotten = system->getBuilding_list();
+	BOOST_CHECK_EQUAL(building_list_gotten[0].getBuildingID(), building0.getBuildingID());
+	BOOST_CHECK_EQUAL(building_list_gotten[1].getBuildingID(), building1.getBuildingID());
 
 	//add Planet by buy_building() method
 	Building building2;
 	system->buy_building(building2);
-    BOOST_CHECK_EQUAL(building_list_getted[2].getBuildingID(), 2);
+    BOOST_CHECK_EQUAL(building_list_gotten[2].getBuildingID(), 2);
 
 //--------------------------------------------------------
 //					Planet
@@ -176,16 +177,50 @@ BOOST_AUTO_TEST_CASE(TestState)
 	BOOST_CHECK_EQUAL(ressource_init->getScience(), 2);
 	BOOST_CHECK_EQUAL(ressource_init->getFood(), 1);
 
-	//
-
-
 //--------------------------------------------------------
 //					Player
 //--------------------------------------------------------
-	//Player Hugo;
+	Player Hugo;
 
-	//Ressources
-	//Hugo.setRessources()
+	//Ressources, test uniquement sur Brume par exemple suffit
+	Hugo.setRessources(*ressource_init);
+	Ressource hugo_ressources = Hugo.getRessources();
+	BOOST_CHECK_EQUAL(ressource_init->getBrume(), hugo_ressources.getBrume());
+
+	//Ship
+	Hugo.setShip(*ship_1);
+	Ship ship_gotten = Hugo.getShip();
+	BOOST_CHECK_EQUAL(ship_gotten.getShipID(), 0); //0 car premier Ship créer
+
+	//StellarSystem
+	Hugo.setStellarSystem(*system);
+	StellarSystem system_gotten = Hugo.getStellarSystem();
+	BOOST_CHECK_EQUAL(system_gotten.getSystemID(), 4);
+
+	//isTurn
+	Hugo.setIsTurn(true);
+	BOOST_CHECK_EQUAL(Hugo.getIsTurn(), true);
+
+	//Building_list setter
+	std::vector<Ship> ship_list	= {*ship_1, *ship_2};
+	Hugo.setShip_list(ship_list);
+	const std::vector<Ship>& ship_list_gotten = Hugo.getShip_list();
+	BOOST_CHECK_EQUAL(ship_list_gotten[0].getShipID(), ship_1->getShipID());
+	BOOST_CHECK_EQUAL(ship_list_gotten[1].getShipID(), ship_2->getShipID());
+
+	//MoveShip() et autres méthodes move à faire une fois position.cpp OK
+	// Test add_MoveShipMap
+	Position *ship_pos = new Position(2,2);
+	ship_1->setPosition(*ship_pos);
+	Hugo.add_MoveShipMap(*ship_1);
+	const std::vector<std::pair<int, int>> moveship1map = Hugo.getMoveShip_map();
+	/*std::pair<int, int> pos1 = std::make_pair(2, 3);
+	BOOST_CHECK_EQUAL(moveship1map[0], pos1);*/ 
+
+//--------------------------------------------------------
+//					State
+//--------------------------------------------------------
+	
 
 }
  /*vim: set sw=2 sts=2 et : */
