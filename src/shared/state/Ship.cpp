@@ -6,9 +6,18 @@ using namespace state;
 
 int Ship::instance_count = 0;
 
-Ship::Ship(){}
+Ship::Ship(){
+	this->price = 10;
+	this->production_cost = 10;
+	this->level = 0;
+	this->experience = 0;
+	this->shipID = instance_count++;
+}
 
-Ship::Ship(Ship_TypeID ship) {
+Ship::Ship(Ship_TypeID type_ship) {
+	if (type_ship == 3){
+		
+	}
 	this->price = 10;
 	this->production_cost = 10;
 	this->level = 0;
@@ -91,7 +100,7 @@ void Ship::attack(Ship* ship_target) {
 	this->receiveDamages(damage_attacker);
 }
 
-void Ship::moveShip(){}
+void Ship::moveShip(){} // Is it a command for the engine ? 
 
 void Ship::LevelUp() {
 	this->setLevel(this->level +1);
