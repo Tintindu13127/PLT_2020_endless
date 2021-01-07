@@ -35,5 +35,26 @@ void Player::setIsTurn(bool isTurn) {
 	this->isTurn = isTurn;
 }
 
+int Player::getProduction_prod() const {
+	return this->production_prod;
+}
+void Player::setProduction_prod(int production_prod) {
+	this->production_prod = production_prod;
+}
+
+int Player::getBrume_prod() const {
+	return this->brume_prod;
+}
+void Player::setBrume_prod(int brume_prod) {
+	this->brume_prod= brume_prod;
+}
+
+int Player::getFood_prod() const {
+	return this->food_prod;
+}
+void Player::setFood_prod(int food_prod){
+	this->food_prod = food_prod;
+}
+
 
 //Autres méthodes, à confirmer si on en a vraiment besoin

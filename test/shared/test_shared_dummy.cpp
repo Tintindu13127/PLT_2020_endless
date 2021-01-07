@@ -70,6 +70,14 @@ BOOST_AUTO_TEST_CASE(TestState)
 	ship_1->LevelUp();
 	BOOST_CHECK_EQUAL(ship_1->getLevel(), 2);
 
+	// Test add_MoveShipMap
+	Position *ship_pos = new Position(2,2);
+	ship_1->setPosition(*ship_pos);
+	ship_1->add_MoveShipMap();
+	const std::vector<std::pair<int, int>> moveship1map = ship_1->getMoveShip_map();
+	/*std::pair<int, int> pos1 = std::make_pair(2, 3);
+	BOOST_CHECK_EQUAL(moveship1map[0], pos1);*/
+
 //--------------------------------------------------------
 //					StellarSystem
 //--------------------------------------------------------	
@@ -99,6 +107,37 @@ BOOST_AUTO_TEST_CASE(TestState)
 	BOOST_CHECK_EQUAL(building_list_gotten[0].getBuildingID(), building0.getBuildingID());
 	BOOST_CHECK_EQUAL(building_list_gotten[1].getBuildingID(), building1.getBuildingID());
 
+	// Type
+	Type_StellarSystemID type1 = cold;
+	system->setType(type1);
+	BOOST_CHECK_EQUAL(system->getType(), type1);
+
+	// Size_stellarsystem
+	SizeID size1 = small;
+	system->setSize_ss(size1);
+	BOOST_CHECK_EQUAL(system->getSize_ss(), size1);
+
+	// Statut
+	StatutID statut1 = colonized;
+	system->setStatut(statut1);
+	BOOST_CHECK_EQUAL(system->getStatut(), statut1); 
+
+	// Prod
+	int brume_prod = 2;
+	int food_prod = 3;
+	int production_prod = 5;
+	system->setBrume_prod(brume_prod);
+	system->setFood_prod(food_prod);
+	system->setProduction_prod(production_prod);
+	BOOST_CHECK_EQUAL(system->getBrume_prod(), brume_prod);
+	BOOST_CHECK_EQUAL(system->getFood_prod(), food_prod);
+	BOOST_CHECK_EQUAL(system->getProduction_prod(), production_prod);
+
+	// Colonize
+	system->colonize();
+	BOOST_CHECK_EQUAL(system->getIsCaptured(), true);
+
+
 	//add Planet by build_building() method
 	Building building2;
 	system->build_building(building2);
@@ -108,12 +147,16 @@ BOOST_AUTO_TEST_CASE(TestState)
 //					Building
 //--------------------------------------------------------	
 	//building_price
-	/*building0.setPrice(5); // A CORRIGER AVEC LE NOUVEAU BUILDING.CPP
-	BOOST_CHECK_EQUAL(building0.getPrice(), 5);
+	building0.setBrume_price(5);
+	building0.setProduction_price(3);
+	building0.setFood_price(2);
+	BOOST_CHECK_EQUAL(building0.getBrume_price(), 5);
+	BOOST_CHECK_EQUAL(building0.getProduction_price(), 3);
+	BOOST_CHECK_EQUAL(building0.getFood_price(), 2);
 
 	//building_production
-	building0.setProduction(6);
-	BOOST_CHECK_EQUAL(building0.getProduction(), 6);*/
+	building0.setProd_quantity(6);
+	BOOST_CHECK_EQUAL(building0.getProd_quantity(), 6);
 
 	//buildingID
 	building0.setBuildingID(36);
@@ -138,16 +181,17 @@ BOOST_AUTO_TEST_CASE(TestState)
 	Ressource hugo_ressources = Hugo.getRessources();
 	BOOST_CHECK_EQUAL(ressource_init->getBrume(), hugo_ressources.getBrume());
 
-	//StellarSystem
-	/*Hugo.setStellarSystem(*system);
-	StellarSystem system_gotten = Hugo.getStellarSystem();
-	BOOST_CHECK_EQUAL(system_gotten.getSystemID(), 4);*/
+	//List_StellarSystem
+	std::vector<StellarSystem> stellarsystem_list = {*system};
+	Hugo.setList_stellarSystem(stellarsystem_list);
+	StellarSystem system_gotten = Hugo.getList_stellarSystem()[0];
+	BOOST_CHECK_EQUAL(system_gotten.getSystemID(), 4);
 
 	//isTurn
 	Hugo.setIsTurn(true);
 	BOOST_CHECK_EQUAL(Hugo.getIsTurn(), true);
 
-	//Building_list setter
+	//List_ship setter
 	std::vector<Ship> ship_list	= {*ship_1, *ship_2};
 	Hugo.setList_ship(ship_list);
 	const std::vector<Ship>& ship_list_gotten = Hugo.getList_ship();

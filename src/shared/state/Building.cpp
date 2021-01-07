@@ -46,6 +46,11 @@ void Building::setProd_type(Ressources prod_type) {
 	this->prod_type = prod_type;
 }
 
-
+int Building::getProd_quantity() const {
+	return this->prod_quantity;
+}
+void Building::setProd_quantity(int prod_quantity) {
+	this->prod_quantity = prod_quantity;
+}
 
 // Others methods
