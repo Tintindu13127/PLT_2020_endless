@@ -106,6 +106,23 @@ void Ship::LevelUp() {
 	this->setLevel(this->level +1);
 }
 
+const std::vector<std::pair<int, int>>& Ship::getMoveShip_map() const {
+	return this->moveShip_map;
+}
+void Ship::setMoveShip_map(const std::vector<std::pair<int, int>>& moveShip_map) {
+	this->moveShip_map = moveShip_map;
+}
 
+void Ship::add_MoveShipMap(){ // Se lance après avoir cliqué sur un Ship
+	Position ship_pos = this->getPosition();
+	int ship_x = ship_pos.getX();
+	int ship_y = ship_pos.getY();
+	int i = -1;
+	for (i = -1; i<2; i++) {
+		this->moveShip_map.push_back({ship_x, ship_y +i});
+		this->moveShip_map.push_back({ship_x +i, ship_y});
+		i++;
+	}
+}
 
 

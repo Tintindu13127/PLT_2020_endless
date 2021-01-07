@@ -5,10 +5,9 @@ using namespace state;
 Ressource::Ressource(){
 	
 }
-Ressource::Ressource(int brume, int prod, int science, int food) {
+Ressource::Ressource(int brume, int prod, int food) {
 	this->setBrume(brume);
 	this->setProd(prod);
-	this->setScience(science);
 	this->setFood(food);
 }
 Ressource::~Ressource() {}
@@ -27,13 +26,6 @@ int Ressource::getProd(){
 }
 void Ressource::setProd(int newProd) {
 	this->production = newProd;
-}
-
-int Ressource::getScience(){
-	return this->science;
-}
-void Ressource::setScience(int newScience) {
-	this->science = newScience;
 }
 
 int Ressource::getFood(){

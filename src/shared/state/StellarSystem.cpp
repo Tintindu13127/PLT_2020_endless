@@ -6,7 +6,6 @@ int StellarSystem::instance_count = 0;
 
 //Constructeur + destructeur
 StellarSystem::StellarSystem() {
-	this->nb_planets = 1;
 	this->IsCaptured = false;
 	this->systemID = instance_count++;
 	// this->planet_list.push_back(new_planet); ajouter au constructeur un argument planet ?
@@ -17,12 +16,6 @@ StellarSystem::~StellarSystem() {}
 
 // Setters et getters
 
-int StellarSystem::getNb_planets() const {
-	return this->nb_planets;
-}
-void StellarSystem::setNb_planets(int nb_planets) {
-	this->nb_planets = nb_planets;
-}
 
 const std::string& StellarSystem::getOwner() const {
 	return this->owner;
@@ -45,13 +38,6 @@ void StellarSystem::setSystemID(int systemID) {
 	this->systemID = systemID;
 }
 
-const std::vector<Planet>& StellarSystem::getPlanet_list() const {
-	return this->planet_list;
-}
-void StellarSystem::setPlanet_list(const std::vector<Planet>& planet_list) {
-	this->planet_list = planet_list;
-}
-
 const std::vector<Building>& StellarSystem::getBuilding_list() const { 
 	return this->building_list;
 }
@@ -61,27 +47,14 @@ void StellarSystem::setBuilding_list(const std::vector<Building>& building_list)
 
 //Autres méthodes
 
-void StellarSystem::add_planet_list(Planet planet) {
-	this->planet_list.push_back(planet);
-}
-
-void StellarSystem::buy_building(Building building) {
+void StellarSystem::build_building(Building building) {
 	this->building_list.push_back(building);
-	// faire perdre de l'argent au joueur
+	// faire perdre de l'argent au joueur, la nourriture et la production
 }
 
-// Fonction pour le render ?
-//void see_stellarsys() {}
 
-bool StellarSystem::colonize(Planet *planet) {
-	if (planet->getStatut() != 1) {
-		return false;
-	}
-	else {
-		return true;
-	}
+void StellarSystem::colonize() {
+	this->setIsCaptured(true);
 } 
 
-//Pas sûr que ce soit nécessaire
-//bool upgradeBuilding (Building building) {}
 

@@ -14,18 +14,18 @@ void Player::setRessources(const Ressource& ressources) {
 	this->ressources = ressources;
 }
 
-const Ship& Player::getShip() const {
-	return this->ship;
+const std::vector<Ship>& Player::getList_ship() const{
+	return this->list_ship;
 }
-void Player::setShip(const Ship& ship) {
-	this->ship = ship;
+void Player::setList_ship(const std::vector<Ship>& list_ship) {
+	this->list_ship = list_ship;
 }
 
-const StellarSystem& Player::getStellarSystem() const {
-	return this->stellarSystem;
+const std::vector<StellarSystem>& Player::getList_stellarSystem() const{
+	return this->list_stellarSystem;
 }
-void Player::setStellarSystem(const StellarSystem& stellarSystem) {
-	this->stellarSystem = stellarSystem;
+void Player::setList_stellarSystem(const std::vector<StellarSystem>& list_stellarSystem) {
+	this->list_stellarSystem = list_stellarSystem;
 }
 
 bool Player::getIsTurn() const {
@@ -35,30 +35,5 @@ void Player::setIsTurn(bool isTurn) {
 	this->isTurn = isTurn;
 }
 
-const std::vector<std::pair<int, int>>& Player::getMoveShip_map() const {
-	return this->moveShip_map;
-}
-void Player::setMoveShip_map(const std::vector<std::pair<int, int>>& moveShip_map) {
-	this->moveShip_map = moveShip_map;
-}
-
-void Player::add_MoveShipMap(Ship ship){ // Se lance après avoir cliqué sur un Ship
-	Position ship_pos = ship.getPosition();
-	int ship_x = ship_pos.getX();
-	int ship_y = ship_pos.getY();
-	int i = -1;
-	for (i = -1; i<2; i++) {
-		this->moveShip_map.push_back({ship_x, ship_y +i});
-		this->moveShip_map.push_back({ship_x +i, ship_y});
-		i++;
-	}
-}
-
-const std::vector<Ship>& Player::getShip_list() const {
-	return this->ship_list;
-}
-void Player::setShip_list(const std::vector<Ship>& ship_list) {
-	this->ship_list = ship_list;
-}
 
 //Autres méthodes, à confirmer si on en a vraiment besoin
