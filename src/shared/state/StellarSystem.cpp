@@ -45,6 +45,48 @@ void StellarSystem::setBuilding_list(const std::vector<Building>& building_list)
 	this->building_list = building_list;
 }
 
+Type_StellarSystemID StellarSystem::getType() const {
+	return this->type;
+}
+void StellarSystem::setType(Type_StellarSystemID type) {
+	this->type = type;
+}
+
+SizeID StellarSystem::getSize_ss() const {
+	return this->size_ss;
+}
+void StellarSystem::setSize_ss(SizeID size_ss) {
+	this->size_ss = size_ss;
+}
+
+StatutID StellarSystem::getStatut() const {
+	return this->statut;
+}
+void StellarSystem::setStatut(StatutID statut) {
+	this->statut = statut;
+}
+
+int StellarSystem::getProduction_prod() const {
+	return this->production_prod;
+}
+void StellarSystem::setProduction_prod(int production_prod) {
+	this->production_prod = production_prod;
+}
+
+int StellarSystem::getBrume_prod() const {
+	return this->brume_prod;
+}
+void StellarSystem::setBrume_prod(int brume_prod) {
+	this->brume_prod= brume_prod;
+}
+
+int StellarSystem::getFood_prod() const {
+	return this->food_prod;
+}
+void StellarSystem::setFood_prod(int food_prod){
+	this->food_prod = food_prod;
+}
+
 //Autres méthodes
 
 void StellarSystem::build_building(Building building) {
