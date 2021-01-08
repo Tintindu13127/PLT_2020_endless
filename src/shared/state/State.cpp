@@ -24,7 +24,18 @@ void State::setPlayer_b(const Player& player_b) {
 int State::getTurn() const {
 	return this->turn;
 }
+void State::setTurn(int turn) {
+	this->turn = turn;
+}
 
 void State::IncrementTurn(){
 	this->turn++;
 }
+
+const std::vector<SpaceCell>& State::getMap() const {
+	return this->map;
+}
+void State::setMap(const std::vector<SpaceCell>& map) {
+	this->map = map;
+}
+
