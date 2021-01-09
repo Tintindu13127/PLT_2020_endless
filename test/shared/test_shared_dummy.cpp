@@ -4,6 +4,7 @@
 #include "../../src/shared/state/StellarSystem.h"
 #include "../../src/shared/state/Player.h"
 #include "../../src/shared/state/Objet.h"
+#include "../../src/shared/state/State.h"
 
 
 using namespace ::state;
@@ -71,10 +72,10 @@ BOOST_AUTO_TEST_CASE(TestState)
 	BOOST_CHECK_EQUAL(ship_1->getLevel(), 2);
 
 	// Test add_MoveShipMap
-	Position *ship_pos = new Position(2,2);
+	/*Position *ship_pos = new Position(2,2);
 	ship_1->setPosition(*ship_pos);
 	ship_1->add_MoveShipMap();
-	const std::vector<std::pair<int, int>> moveship1map = ship_1->getMoveShip_map();
+	const std::vector<std::pair<int, int>> moveship1map = ship_1->getMoveShip_map();*/
 	/*std::pair<int, int> pos1 = std::make_pair(2, 3);
 	BOOST_CHECK_EQUAL(moveship1map[0], pos1);*/
 
@@ -198,19 +199,31 @@ BOOST_AUTO_TEST_CASE(TestState)
 	BOOST_CHECK_EQUAL(ship_list_gotten[0].getShipID(), ship_1->getShipID());
 	BOOST_CHECK_EQUAL(ship_list_gotten[1].getShipID(), ship_2->getShipID());
 
-	//MoveShip() et autres méthodes move à faire une fois position.cpp OK
-	// Test add_MoveShipMap
-	/*Position *ship_pos = new Position(2,2);
-	ship_1->setPosition(*ship_pos);
-	Hugo.add_MoveShipMap(*ship_1);
-	const std::vector<std::pair<int, int>> moveship1map = Hugo.getMoveShip_map();*/
-	/*std::pair<int, int> pos1 = std::make_pair(2, 3);
-	BOOST_CHECK_EQUAL(moveship1map[0], pos1);*/ 
+	//addShip
+	auto ship_3 = new Ship();
+	Hugo.addShip(*ship_3);
+	BOOST_CHECK_EQUAL(Hugo.getList_ship()[2].getShipID(), ship_3->getShipID());
+
+	//addStellarSystem
+	auto system2 = new StellarSystem();
+	Hugo.addStellarSystem(*system2);
+	BOOST_CHECK_EQUAL(Hugo.getList_stellarSystem()[1].getSystemID(), system2->getSystemID());
+
 
 //--------------------------------------------------------
 //					State
 //--------------------------------------------------------
-	
+	//Player
+	auto state = new State();
+	state->setPlayer_a(Hugo);
+	Hugo.setPlayer_id(12);
+	BOOST_CHECK_EQUAL(Hugo.getPlayer_id(), 12);
+
+	// Turn
+	state->setTurn(10);
+	BOOST_CHECK_EQUAL(state->getTurn(), 10);
+	state->IncrementTurn();
+	BOOST_CHECK_EQUAL(state->getTurn(), 11);
 
 }
  /*vim: set sw=2 sts=2 et : */

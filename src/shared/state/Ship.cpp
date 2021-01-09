@@ -1,4 +1,5 @@
 #include "Ship.h"
+#include "State.h"
 #include <iostream>
 
 using namespace std;
@@ -78,6 +79,13 @@ void Ship::setShip_stats(const ShipStats& ship_stats) {
 	this->ship_stats = ship_stats;
 }
 
+int Ship::getMovement_left() const {
+	return this->movement_left;
+}
+void Ship::setMovement_left(int movement_left) {
+	this->movement_left = movement_left;
+}
+
 // Operations
 void Ship::receiveDamages(int damage_point) { // TO DO utiliser une exception au moment de la destruction
 	int hp = this->ship_stats.health ;
@@ -100,29 +108,60 @@ void Ship::attack(Ship* ship_target) {
 	this->receiveDamages(damage_attacker);
 }
 
-void Ship::moveShip(){} // Is it a command for the engine ? 
-
 void Ship::LevelUp() {
 	this->setLevel(this->level +1);
 }
 
-const std::vector<std::pair<int, int>>& Ship::getMoveShip_map() const {
+const std::vector<SpaceCell>& Ship::getMoveShip_map() const {
 	return this->moveShip_map;
 }
-void Ship::setMoveShip_map(const std::vector<std::pair<int, int>>& moveShip_map) {
+void Ship::setMoveShip_map(const std::vector<SpaceCell>& moveShip_map) {
 	this->moveShip_map = moveShip_map;
 }
 
-void Ship::add_MoveShipMap(){ // Se lance après avoir cliqué sur un Ship
+std::vector<SpaceCell> Ship::proximityCell (State& state1) { //Renvoi la liste des SpaceCells à proximité
+	std::vector<SpaceCell> proximityCell_tab;
 	Position ship_pos = this->getPosition();
 	int ship_x = ship_pos.getX();
 	int ship_y = ship_pos.getY();
-	int i = -1;
-	for (i = -1; i<2; i++) {
-		this->moveShip_map.push_back({ship_x, ship_y +i});
-		this->moveShip_map.push_back({ship_x +i, ship_y});
-		i++;
+	std::vector<SpaceCell> map = state1.getMap();
+
+	for (auto spaceCell : map){
+		Position cell_pos = spaceCell.getPosition() ;
+		if ((cell_pos.getX() == ship_x) && (cell_pos.getY() == ship_y + 1)) {
+			proximityCell_tab.push_back(spaceCell);
+		}
+		else if ((cell_pos.getX() == ship_x && cell_pos.getY() == ship_y - 1))
+		{
+			proximityCell_tab.push_back(spaceCell);
+		}
+		else if ((cell_pos.getX() == ship_x + 1) && (cell_pos.getY() == ship_y))
+		{
+			proximityCell_tab.push_back(spaceCell);
+		}
+		else if ((cell_pos.getX() == ship_x - 1) && (cell_pos.getY() == ship_y))
+		{
+			proximityCell_tab.push_back(spaceCell);
+		}
 	}
+	return proximityCell_tab;
+}
+
+void Ship::add_MoveShipMap(State& state){ // Actualise la liste des SpaceCells où le Ship peut se rendre
+	this->moveShip_map.clear();
+	int pm = this->movement_left;
+	for (int j=0; j<pm; j++){
+		std::vector<SpaceCell> proximity_list = this->proximityCell(state);
+		for (int i =0 ; i<4 ; i++) {
+			if (proximity_list[i].getCellTypeId() != Void) { //Les cases "Void" ne sont pas des cases où l'on peut aller
+				this->moveShip_map.push_back(proximity_list[i]);
+			}
+		}
+	}
+	
+
+
+
 }
 
 

@@ -2,7 +2,11 @@
 
 using namespace state;
 
-Player::Player() {}
+int Player::instance_count = 0;
+
+Player::Player() {
+	this->player_id = instance_count++;
+}
 Player::~Player() {}
 
 //Setters & Getters
@@ -56,5 +60,17 @@ void Player::setFood_prod(int food_prod){
 	this->food_prod = food_prod;
 }
 
+void Player::addShip(Ship ship) {
+	this->list_ship.push_back(ship);
+}
+void Player::addStellarSystem(StellarSystem stellarSystem) {
+	this->list_stellarSystem.push_back(stellarSystem);
+}
 
+int Player::getPlayer_id() const {
+	return this->player_id;
+}
+void Player::setPlayer_id(int player_id) {
+	this->player_id = player_id;
+}
 //Autres méthodes, à confirmer si on en a vraiment besoin
