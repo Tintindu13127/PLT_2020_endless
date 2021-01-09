@@ -1,4 +1,4 @@
-#include "Engine.h"
+/*#include "Engine.h"
 #include "engine.h"
 #include <iostream>
 #include <unistd.h>
@@ -31,4 +31,4 @@ std::map<int, std::unique_ptr<Command>>& Engine::getCurrCommands(){return this->
 
 void Engine::setState(state::State currentState) { this-> currentState = currentState;}
 
-void Engine::setRecord(Json::Value record){this->record= record ;}
+void Engine::setRecord(Json::Value record){this->record= record ;}*/

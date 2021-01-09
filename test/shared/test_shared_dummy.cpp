@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(TestState)
 	ship_1->LevelUp();
 	BOOST_CHECK_EQUAL(ship_1->getLevel(), 2);
 
-	// Test add_MoveShipMap
+	// Test proximityCell
 	/*Position *ship_pos = new Position(2,2);
 	ship_1->setPosition(*ship_pos);
 	ship_1->add_MoveShipMap();
@@ -224,6 +224,7 @@ BOOST_AUTO_TEST_CASE(TestState)
 	BOOST_CHECK_EQUAL(state->getTurn(), 10);
 	state->IncrementTurn();
 	BOOST_CHECK_EQUAL(state->getTurn(), 11);
+	BOOST_CHECK_EQUAL(state->player_turn().getPlayer_id(), Hugo.getPlayer_id());
 
 }
  /*vim: set sw=2 sts=2 et : */

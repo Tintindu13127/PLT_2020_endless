@@ -1,4 +1,4 @@
-#include "FinishTurnCommand.h"
+/*#include "FinishTurnCommand.h"
 #include <iostream>
 #include <unistd.h> 
 
@@ -23,4 +23,4 @@ Json::Value FinishTurnCommand::serialize()
     Json::Value newCommand;
     newCommand["id"] = this-> commandID;
     return newCommand;
-}
+}*/

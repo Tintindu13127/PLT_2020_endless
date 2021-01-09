@@ -1,4 +1,4 @@
-#include "Command.h"
+/*#include "Command.h"
 #include <iostream>
 #include <unistd.h>
 
@@ -15,5 +15,5 @@ void Command::setCurrentPlayer(state::Player currentPlayer) {this-> currentPlaye
 
 CommandID Command::getCommandID(){return this->commandID;}
 
-state::Player Command::getCurrentPlayer(){return this->currentPlayer;}
+state::Player Command::getCurrentPlayer(){return this->currentPlayer;}*/
 

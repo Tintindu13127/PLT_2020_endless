@@ -32,6 +32,17 @@ void State::IncrementTurn(){
 	this->turn++;
 }
 
+Player State::player_turn() {
+	if (this->getTurn() % 2 == 0 ) {
+		Player current_player = this->getPlayer_b();
+		return current_player;
+	}
+	else {
+		Player current_player = this->getPlayer_a();
+		return current_player;
+	}
+}
+
 const std::vector<SpaceCell>& State::getMap() const {
 	return this->map;
 }
