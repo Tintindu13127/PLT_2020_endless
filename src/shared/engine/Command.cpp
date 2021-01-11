@@ -1,4 +1,4 @@
-/*
+
 #include "Command.h"
 #include <iostream>
 #include <unistd.h>
@@ -17,4 +17,4 @@ void Command::setCurrentPlayer(const state::Player& currentPlayer) {this-> curre
 CommandID Command::getCommandID() const {return this->commandID;}
 
 const state::Player& Command::getCurrentPlayer() const {return this->currentPlayer;}
-*/
+
