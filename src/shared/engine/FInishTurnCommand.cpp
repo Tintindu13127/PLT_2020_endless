@@ -15,7 +15,7 @@ void FinishTurnCommand::execute(state::State& state)
     // actuliser la production 
 
     //reset le mouvement et attack 
-    state.setTurn(state.getTurn()+1)
+    state.setTurn(state.getTurn()+1);
 }
 
 Json::Value FinishTurnCommand::serialize()

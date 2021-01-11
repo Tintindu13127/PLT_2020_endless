@@ -1,19 +1,20 @@
-/*#include "Command.h"
+/*
+#include "Command.h"
 #include <iostream>
 #include <unistd.h>
 
+
 using namespace engine;
+using namespace state;
 
-
-//setters
 
 void Command::setCommandID(CommandID commandID) { this->commandID = commandID;}
 
-void Command::setCurrentPlayer(state::Player currentPlayer) {this-> currentPlayer = currentPlayer;}
+void Command::setCurrentPlayer(const state::Player& currentPlayer) {this-> currentPlayer = currentPlayer;}
 
 //getters
 
-CommandID Command::getCommandID(){return this->commandID;}
+CommandID Command::getCommandID() const {return this->commandID;}
 
-state::Player Command::getCurrentPlayer(){return this->currentPlayer;}*/
-
+const state::Player& Command::getCurrentPlayer() const {return this->currentPlayer;}
+*/
