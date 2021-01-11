@@ -13,6 +13,9 @@ const Player& State::getPlayer_a() const {
 void State::setPlayer_a(const Player& player_a) {
 	this->player_a = player_a;
 }
+Player* State::getPlayer_a_ptr () {
+	return &(this->player_a);
+}
 
 const Player& State::getPlayer_b() const {
 	return this->player_b;

@@ -175,7 +175,7 @@ BOOST_AUTO_TEST_CASE(TestState)
 //--------------------------------------------------------
 //					Player
 //--------------------------------------------------------
-	Player Hugo;
+	/*Player Hugo;
 
 	//Ressources, test uniquement sur Brume par exemple suffit
 	Hugo.setRessources(*ressource_init);
@@ -218,13 +218,19 @@ BOOST_AUTO_TEST_CASE(TestState)
 	state->setPlayer_a(Hugo);
 	Hugo.setPlayer_id(12);
 	BOOST_CHECK_EQUAL(Hugo.getPlayer_id(), 12);
-
+	BOOST_CHECK_EQUAL(Hugo.getPlayer_id(), state->getPlayer_a_ptr()->getPlayer_id());
 	// Turn
 	state->setTurn(10);
 	BOOST_CHECK_EQUAL(state->getTurn(), 10);
 	state->IncrementTurn();
-	BOOST_CHECK_EQUAL(state->getTurn(), 11);
-	BOOST_CHECK_EQUAL(state->player_turn().getPlayer_id(), Hugo.getPlayer_id());
+	BOOST_CHECK_EQUAL(state->getTurn(), 11);*/
+	
+	auto state = new State();
+	Player* player_null = new Player();
+    state->setPlayer_a(*player_null);
+    Player *Hugo = state->getPlayer_a_ptr();
+    Hugo->setPlayer_id(12);
+	BOOST_CHECK_EQUAL(Hugo->getPlayer_id(), state->getPlayer_a_ptr()->getPlayer_id());
 
 }
  /*vim: set sw=2 sts=2 et : */
