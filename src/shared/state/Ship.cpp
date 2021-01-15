@@ -150,12 +150,14 @@ std::vector<SpaceCell> Ship::proximityCell (State& state1) { //Renvoi la liste d
 void Ship::add_MoveShipMap(State& state){ // Actualise la liste des SpaceCells où le Ship peut se rendre
 	this->moveShip_map.clear();
 	int pm = this->movement_left;
+	std::vector<SpaceCell> proximity_list;
 	for (int j=0; j<pm; j++){
-		std::vector<SpaceCell> proximity_list = this->proximityCell(state);
+		proximity_list = this->proximityCell(state);
 		for (int i =0 ; i<4 ; i++) {
 			if (proximity_list[i].getCellTypeId() != Void) { //Les cases "Void" ne sont pas des cases où l'on peut aller
 				this->moveShip_map.push_back(proximity_list[i]);
 			}
+			proximity_list.pop_back(); // permet de reset proximity_list avant le rappel de proximity_Cell()
 		}
 	}
 	

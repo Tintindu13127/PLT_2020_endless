@@ -1,4 +1,4 @@
-/*#include "MoveCommand.h"
+#include "MoveCommand.h"
 #include <iostream>
 #include <unistd.h> 
 
@@ -13,43 +13,44 @@ MoveCommand::MoveCommand(state::Ship& refShipTarget, state::Position& refPositio
 
 void MoveCommand::execute(state::State& state)
 {
-    cout << "move" <<endl;
+    std::cout << "move" <<std::endl;
     bool allowed = false;
-    if(ShipTarget.getMoveShip_map() != null)
+	Position ship_pos = ShipTarget.getPosition();
+    if(ShipTarget.getMovement_left() != 0)
     {
-        for (auto &pos: ShipTarget.getMoveShip_map())
+        for (auto cell: ShipTarget.getMoveShip_map())
         {
+            Position pos = cell.getPosition();
             // On vérifie si la position se trouve dans les positions possibles et qu'il n'y a pas d'allié sur la case
-            /*if (pos.equals(targetedPos) && )         
-                {
-                    //on déplace le vaisseaux
+			if ( !(pos.IsPosEqual(PositionTarget)) && !(cell.isOccupiedbyAlly(state)) )         
+                {                   
+					//on déplace le vaisseaux et on actualise les PM left
+					ShipTarget.setPosition(PositionTarget);
+					ShipTarget.setMovement_left(ShipTarget.getMovement_left() - ship_pos.DistanceToTarget(PositionTarget));
 
                     //on actualise la carte des mouvements 
-                    ShipTarget.add_MoveShipMap();
+                    ShipTarget.add_MoveShipMap(state);
                     
-                    // la case actuelle est occupé par un allié 
 
                     allowed = true;
                     break;
-                    cout << "le vaisseau a été bougé" << endl;
+                    std::cout << "le vaisseau a été bougé" << std::endl;
                 }
             
             
         }
         if(!allowed)
         {
-            cout << "le vaisseau ne peut se déplacer sur cette case" << endl;
+            std::cout << "le vaisseau ne peut se déplacer sur cette case" << std::endl;
         }
     }
-    cout << "le vaisseau a utilisé tous ses points de mouvement" << endl;
+    std::cout << "le vaisseau a utilisé tous ses points de mouvement" << std::endl;
 
-    else cout << "no movement left" << endl;
 }
 
-J
-son::Value MoveCommand::serialize()
+Json::Value MoveCommand::serialize()
 {
     Json::Value newCommand;
     newCommand["id"] = this-> commandID;
     return newCommand;
-}*/
+}
