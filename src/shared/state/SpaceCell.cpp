@@ -7,6 +7,9 @@ using namespace state;
 int SpaceCell::instance_count = 0;
 
 SpaceCell::SpaceCell(int newX, int newY, CellTypeId cellType) {
+	auto cell_pos = new Position(newX, newY);
+	this->setPosition(*cell_pos);
+	this->cellTypeId = cellType;
 	this->instance_count++;
 }
 SpaceCell::~SpaceCell() {}

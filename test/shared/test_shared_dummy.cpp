@@ -6,9 +6,11 @@
 #include "../../src/shared/state/Objet.h"
 #include "../../src/shared/state/State.h"
 #include "../../src/shared/engine/MoveCommand.h"
+#include "../../src/shared/engine/Engine.h"
 
 
 using namespace ::state;
+using namespace ::engine;
 
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {
@@ -225,23 +227,36 @@ BOOST_AUTO_TEST_CASE(TestState)
     Player *Quentin = state->getPlayer_a_ptr();
     Quentin->setPlayer_id(12);
 	BOOST_CHECK_EQUAL(Quentin->getPlayer_id(), state->getPlayer_a_ptr()->getPlayer_id());
+	
 	// Turn
 	state->setTurn(10);
 	BOOST_CHECK_EQUAL(state->getTurn(), 10);
 	state->IncrementTurn();
 	BOOST_CHECK_EQUAL(state->getTurn(), 11);
+	
 	// player_turn()
 	BOOST_CHECK_EQUAL(state->player_turn().getPlayer_id(), state->getPlayer_a().getPlayer_id());
 	Player current_player = state->player_turn();
 	BOOST_CHECK_EQUAL(current_player.getPlayer_id(), state->getPlayer_a().getPlayer_id());
 
+	//initMap()
+	state->initMap();
+	const std::vector<SpaceCell> map_gotten = state->getMap();
+	BOOST_CHECK_EQUAL(map_gotten[3].getCellTypeId(), StellarSys);
+	BOOST_CHECK_EQUAL(map_gotten[8].getCellTypeId(), StellarWay);
+	BOOST_CHECK_EQUAL(map_gotten[33].getCellTypeId(), Void);
+	
+}
 
+BOOST_AUTO_TEST_CASE(TestEngine) {
+
+	//Engine engine_test;
 //--------------------------------------------------------
 //					MoveCommand.cpp
 //--------------------------------------------------------
-/*	auto ship_move_test = new Ship();
-	auto position_target = new Position();
-*/
-
+	/*auto position_target = new Position(3,4);
+	auto ship_move_test = new Ship(CRUISER, *position_target);*/
+	
+	
 }
  /*vim: set sw=2 sts=2 et : */
