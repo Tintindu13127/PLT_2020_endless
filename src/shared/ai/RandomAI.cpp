@@ -14,7 +14,7 @@ using namespace engine;
 
 void RandomAI::run(engine::Engine& myEngine){
 
-    Player player = myEngine.getState().player_turn();
+    /*Player player = myEngine.getState().player_turn();
     std::vector<Ship> list_ship = player.getList_ship();
     std::vector<StellarSystem> list_stellarSystem = player.getList_stellarSystem();
     
@@ -56,5 +56,5 @@ void RandomAI::run(engine::Engine& myEngine){
         }
     }
     unique_ptr<Command> ptr_fin(new FinishTurnCommmand());
-    myEngine.addCommand(move(ptr_fin));
+    myEngine.addCommand(move(ptr_fin));*/
 }
