@@ -15,20 +15,31 @@ Ship::Ship(){
 	this->shipID = instance_count++;
 }
 
-Ship::Ship(Ship_TypeID type_ship) {
-	if (type_ship == 3){
+Ship::Ship(Ship_TypeID type_ship, Position ship_pos) {
+	/*if (type_ship == 3){ TO DO SI ON VEUT COMPLEXIFIER LE JEU
 		
-	}
+	}*/
 	this->price = 10;
 	this->production_cost = 10;
 	this->level = 0;
 	this->experience = 0;
+	this->setType_ship(type_ship);
+	this->setPosition(ship_pos);
+	this->setMovement_point(3);
+
 	this->shipID = instance_count++;
 }
 
 Ship::~Ship() {}
 
 //Setters & Getters
+
+int Ship::getMovement_point() const {
+	return this->movement_point;
+}
+void Ship::setMovement_point(int movement_point){
+	this->movement_point = movement_point;
+}
 
 int Ship::getShipID() const {
 	return this->shipID;
@@ -150,12 +161,14 @@ std::vector<SpaceCell> Ship::proximityCell (State& state1) { //Renvoi la liste d
 void Ship::add_MoveShipMap(State& state){ // Actualise la liste des SpaceCells où le Ship peut se rendre
 	this->moveShip_map.clear();
 	int pm = this->movement_left;
+	std::vector<SpaceCell> proximity_list;
 	for (int j=0; j<pm; j++){
-		std::vector<SpaceCell> proximity_list = this->proximityCell(state);
+		proximity_list = this->proximityCell(state);
 		for (int i =0 ; i<4 ; i++) {
 			if (proximity_list[i].getCellTypeId() != Void) { //Les cases "Void" ne sont pas des cases où l'on peut aller
 				this->moveShip_map.push_back(proximity_list[i]);
 			}
+			proximity_list.pop_back(); // permet de reset proximity_list avant le rappel de proximity_Cell()
 		}
 	}
 	

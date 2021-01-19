@@ -1,5 +1,4 @@
-/*#include "Engine.h"
-#include "engine.h"
+#include "Engine.h"
 #include <iostream>
 #include <unistd.h>
 
@@ -23,14 +22,24 @@ void Engine::addCommand(std::unique_ptr<Command> ptr_cmd)
 
 //getters
 
-state::State& Engine::getState(){return this->currentState;}
+state::State& Engine::getState(){
+	return this->currentState;
+}
 
-Json::Value Engine::getRecord(){return this-> record;}
+Json::Value Engine::getRecord(){
+	return this->record;
+}
 
-std::map<int, std::unique_ptr<Command>>& Engine::getCurrentCommands(){return this->currentCommands;}
+std::map<int, std::unique_ptr<Command>>& Engine::getCurrentCommands(){
+	return this->currentCommands;
+}
 
 //setters
 
-void Engine::setState(state::State& currentState) { this-> currentState = currentState;}
+void Engine::setState(state::State& currentState) {
+	this-> currentState = currentState;
+}
 
-void Engine::setRecord(Json::Value record){this->record= record ;}*/
+void Engine::setRecord(Json::Value record){
+	this->record= record ;
+}

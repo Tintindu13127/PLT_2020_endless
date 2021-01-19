@@ -1,4 +1,5 @@
 #include "Position.h"
+#include <stdlib.h>
 
 using namespace state;
 
@@ -31,3 +32,16 @@ void Position::setY(int Y){
 	this->Y = Y;
 }
 
+bool Position::IsPosEqual(Position pos_target) {
+	if (this->getX() == pos_target.getX() && this->getY() == pos_target.getY()) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+int Position::DistanceToTarget(Position pos_target) {
+	int distance = abs(this->getX() - pos_target.getX()) + abs(this->getY() - pos_target.getY());
+	return distance;
+}

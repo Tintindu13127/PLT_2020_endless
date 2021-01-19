@@ -5,9 +5,12 @@
 #include "../../src/shared/state/Player.h"
 #include "../../src/shared/state/Objet.h"
 #include "../../src/shared/state/State.h"
+#include "../../src/shared/engine/MoveCommand.h"
+#include "../../src/shared/engine/Engine.h"
 
 
 using namespace ::state;
+using namespace ::engine;
 
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {
@@ -175,39 +178,43 @@ BOOST_AUTO_TEST_CASE(TestState)
 //--------------------------------------------------------
 //					Player
 //--------------------------------------------------------
-	/*Player Hugo;
+	Player* Hugo = new Player();
 
 	//Ressources, test uniquement sur Brume par exemple suffit
-	Hugo.setRessources(*ressource_init);
-	Ressource hugo_ressources = Hugo.getRessources();
+	Hugo->setRessources(*ressource_init);
+	Ressource hugo_ressources = Hugo->getRessources();
 	BOOST_CHECK_EQUAL(ressource_init->getBrume(), hugo_ressources.getBrume());
 
 	//List_StellarSystem
 	std::vector<StellarSystem> stellarsystem_list = {*system};
-	Hugo.setList_stellarSystem(stellarsystem_list);
-	StellarSystem system_gotten = Hugo.getList_stellarSystem()[0];
+	Hugo->setList_stellarSystem(stellarsystem_list);
+	StellarSystem system_gotten = Hugo->getList_stellarSystem()[0];
 	BOOST_CHECK_EQUAL(system_gotten.getSystemID(), 4);
 
 	//isTurn
-	Hugo.setIsTurn(true);
-	BOOST_CHECK_EQUAL(Hugo.getIsTurn(), true);
+	Hugo->setIsTurn(true);
+	BOOST_CHECK_EQUAL(Hugo->getIsTurn(), true);
 
 	//List_ship setter
 	std::vector<Ship> ship_list	= {*ship_1, *ship_2};
-	Hugo.setList_ship(ship_list);
-	const std::vector<Ship>& ship_list_gotten = Hugo.getList_ship();
+	Hugo->setList_ship(ship_list);
+	const std::vector<Ship>& ship_list_gotten = Hugo->getList_ship();
 	BOOST_CHECK_EQUAL(ship_list_gotten[0].getShipID(), ship_1->getShipID());
 	BOOST_CHECK_EQUAL(ship_list_gotten[1].getShipID(), ship_2->getShipID());
 
 	//addShip
 	auto ship_3 = new Ship();
-	Hugo.addShip(*ship_3);
-	BOOST_CHECK_EQUAL(Hugo.getList_ship()[2].getShipID(), ship_3->getShipID());
+	Hugo->addShip(*ship_3);
+	BOOST_CHECK_EQUAL(Hugo->getList_ship()[2].getShipID(), ship_3->getShipID());
 
 	//addStellarSystem
 	auto system2 = new StellarSystem();
-	Hugo.addStellarSystem(*system2);
-	BOOST_CHECK_EQUAL(Hugo.getList_stellarSystem()[1].getSystemID(), system2->getSystemID());
+	Hugo->addStellarSystem(*system2);
+	BOOST_CHECK_EQUAL(Hugo->getList_stellarSystem()[1].getSystemID(), system2->getSystemID());
+
+	// Test Build ID 
+	const std::vector<Building>& hugo_building_list_gotten = Hugo->getList_stellarSystem()[0].getBuilding_list();
+	BOOST_CHECK_EQUAL(hugo_building_list_gotten[2].getBuildingID(), 2);
 
 
 //--------------------------------------------------------
@@ -215,22 +222,41 @@ BOOST_AUTO_TEST_CASE(TestState)
 //--------------------------------------------------------
 	//Player
 	auto state = new State();
-	state->setPlayer_a(Hugo);
-	Hugo.setPlayer_id(12);
-	BOOST_CHECK_EQUAL(Hugo.getPlayer_id(), 12);
-	BOOST_CHECK_EQUAL(Hugo.getPlayer_id(), state->getPlayer_a_ptr()->getPlayer_id());
+	Player* player_null = new Player();
+    state->setPlayer_a(*player_null);
+    Player *Quentin = state->getPlayer_a_ptr();
+    Quentin->setPlayer_id(12);
+	BOOST_CHECK_EQUAL(Quentin->getPlayer_id(), state->getPlayer_a_ptr()->getPlayer_id());
+	
 	// Turn
 	state->setTurn(10);
 	BOOST_CHECK_EQUAL(state->getTurn(), 10);
 	state->IncrementTurn();
-	BOOST_CHECK_EQUAL(state->getTurn(), 11);*/
+	BOOST_CHECK_EQUAL(state->getTurn(), 11);
 	
-	auto state = new State();
-	Player* player_null = new Player();
-    state->setPlayer_a(*player_null);
-    Player *Hugo = state->getPlayer_a_ptr();
-    Hugo->setPlayer_id(12);
-	BOOST_CHECK_EQUAL(Hugo->getPlayer_id(), state->getPlayer_a_ptr()->getPlayer_id());
+	// player_turn()
+	BOOST_CHECK_EQUAL(state->player_turn().getPlayer_id(), state->getPlayer_a().getPlayer_id());
+	Player current_player = state->player_turn();
+	BOOST_CHECK_EQUAL(current_player.getPlayer_id(), state->getPlayer_a().getPlayer_id());
 
+	//initMap()
+	state->initMap();
+	const std::vector<SpaceCell> map_gotten = state->getMap();
+	BOOST_CHECK_EQUAL(map_gotten[3].getCellTypeId(), StellarSys);
+	BOOST_CHECK_EQUAL(map_gotten[8].getCellTypeId(), StellarWay);
+	BOOST_CHECK_EQUAL(map_gotten[33].getCellTypeId(), Void);
+	
+}
+
+BOOST_AUTO_TEST_CASE(TestEngine) {
+
+	//Engine engine_test;
+//--------------------------------------------------------
+//					MoveCommand.cpp
+//--------------------------------------------------------
+	/*auto position_target = new Position(3,4);
+	auto ship_move_test = new Ship(CRUISER, *position_target);*/
+	
+	
 }
  /*vim: set sw=2 sts=2 et : */
