@@ -7,7 +7,7 @@ using namespace state;
 using namespace std;
 
 
-BuildShipCommand::BuildShipCommand (state::Ship& refShipTarget, state::StellarSystem& refStellarTarget) : ShipTarget(refShipTarget), StellarTarget(refStellarTarget)
+BuildShipCommand::BuildShipCommand (state::Ship_TypeID& refShipID, state::StellarSystem& refStellarTarget) : ShipID(refShipID), StellarTarget(refStellarTarget)
 {
     this->commandID = BUY_SHIP;
 }

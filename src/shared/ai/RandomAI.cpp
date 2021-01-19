@@ -14,8 +14,9 @@ using namespace engine;
 
 void RandomAI::run(engine::Engine& myEngine){
 
-    /*Player player = myEngine.getState().player_turn();
+    Player player = myEngine.getState().player_turn();
     std::vector<Ship> list_ship = player.getList_ship();
+    std::vector<StellarSystem> list_stellarSystem = player.getList_stellarSystem();
     
     for(unsigned int i = 0; i < list_ship.size(); i++)
     {
@@ -43,6 +44,17 @@ void RandomAI::run(engine::Engine& myEngine){
             myEngine.addCommand(move(ptr_col));
         }
     }
+    for(unsigned int j = 0; j < list_stellarSystem.size(); j++)
+    {
+        int random = rand() % 100 + 1;
+        StellarSystem stellar = list_stellarSystem[i];
+        if(random > 30)
+        {
+            //construction
+            unique_ptr<engine::Command> ptr_build(new BuildShipCommand(ship,stellar));
+            myEngine.addCommand(move(ptr_build));
+        }
+    }
     unique_ptr<Command> ptr_fin(new FinishTurnCommmand());
-    myEngine.addCommand(move(ptr_fin));*/
+    myEngine.addCommand(move(ptr_fin));
 }
