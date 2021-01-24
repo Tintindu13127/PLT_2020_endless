@@ -11,7 +11,7 @@ d’éléments mobiles ainsi que l'état du joueur.
 
 \subsection{États éléments fixes}
 
-La map est formé par une grille d’éléments nommé « Map ». La taille de cette grille est
+La map est formée par une grille d’éléments nommé « SpaceCell ». La taille de cette grille est
 fixée. Les éléments fixes sur cette grille sont :\\
 
 \begin{itemize}
@@ -37,7 +37,7 @@ De plus lorsqu'un joueur possède une système stellaire, il a la possibilité d
 
 Les seuls éléments mobiles du jeu sont les vaisseaux.
 
-L'élément mobile "Ship" est dirigé par le "Player", il est construit ou acheter dans les stystèmes stellaires. Chaque « Ship » possède des statistiques propres à sa classe. On lui associe ainsi des points de vie “heath”, des dégats d'attaque “attack-point”, une défense “defense-point” et des points de déplacement. Chaque vaisseaux possède aussi un avantage parmis ses quatres:\\
+L'élément mobile "Ship" est dirigé par le "Player", il est construit ou acheter dans les systèmes stellaires. Chaque « Ship » possède des statistiques propres à sa classe. On lui associe ainsi des points de vie “health”, des dégâts d'attaque “attack-point”, une défense “defense-point” et des points de déplacement. Chaque vaisseaux possède aussi un avantage parmi ses quatre :\\
 
 \begin{itemize}
 \item Dégât augmenté contre les vaisseaux,
@@ -58,7 +58,7 @@ Toute la hiérarchie des classes filles “Objet” permettent de représenter l
 catégories et types d’élément.
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.5\textwidth]{pics/classe_objet.PNG}
+\includegraphics[width=0.5\textwidth]{pics/final_state/classe_Objet1.PNG}
 \caption[Bloc "Objet"]{\label{figure_simple}Bloc "Objet"}
 \end{figure}
 
@@ -66,30 +66,34 @@ On peut distinguer les classes filles qui héritent directement de la classe “
 
 \begin{itemize}
     \item La classe "Ship" est la classe qui contient toutes les informations des vaisseaux. Chaque vaisseau est associé des statistiques.  On associe
-également par relation de composition une struture “ShipStats” décrivant
+également par relation de composition une structure “ShipStats” décrivant
 le type de vaisseau, ainsi qu’une énumération “Ship-TypeID” exposant sa
 classe de vaisseau.
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.8\textwidth]{pics/classe_vaisseau.PNG}
+\includegraphics[width=0.8\textwidth]{pics/final_state/classe_vaisseau1.PNG}
 \caption[Bloc "Ship"]{\label{figure_simple}Bloc "Ship"}
 \end{figure}
 
-\item La classe "StellarSytem" est la classe qui contient toutes les informations sur les systèmes stellaires. \\
+\item La classe "StellarSytem" est la classe qui contient toutes les informations sur les systèmes stellaires. On retrouve par exemple la liste des buildings, le type d'environnement du StellarSystem, son statut de colonisation ainsi que sa taille. \\
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.6\textwidth]{pics/classe_system.PNG}
+\includegraphics[width=0.6\textwidth]{pics/final_state/classe_StellarSystem.PNG}
 \caption[Bloc "StellarSytem"]{\label{figure_simple}Bloc "StellarSytem"}
 \end{figure}
 
-Elle associé à deux sous classes "Building" et "Planet"\\
+Elle est associée à deux sous classes "Building" et "Planet".\\
+
+\item La classe "Building" est la classe qui contient toutes les informations sur les Buildings. Chaque "Building" est associée à une "Ressources" en particulier, celle que le bâtiment va produire. De plus dans la classe on retrouve le prix dans chaque ressource permettant la construction du building ainsi que sa production par tour. La méthode "upgradeBuilding" permet elle d'augmenter la production du building. \\
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.6\textwidth]{pics/classe_batiment.PNG}
+\includegraphics[width=0.6\textwidth]{pics/final_state/classe_batiment1.PNG}
 \caption[Bloc "Building"]{\label{figure_simple}Bloc "Building"}
 \end{figure}
+
+\item La classe "Planet" a elle été mise de côté pour simplifier le nomnbre d'objets dans notre jeu,  nous avons donc transférer certains de ses attributs et méthodes dans la classe "StellarSystem". \\ \\ \\
 
 \begin{figure}[!h]
 \centering
@@ -97,34 +101,38 @@ Elle associé à deux sous classes "Building" et "Planet"\\
 \caption[Bloc "Planet"]{\label{figure_simple}Bloc "Planet"}
 \end{figure}
 
-\item la classe "Map" établit aussi une relation d'héritage
+\item La classe "SpaceCell" défini chacune des cases de notre jeu, elle permet dans la classe "State" de définir une map. \\
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.6\textwidth]{pics/classe_map.PNG}
-\caption[Bloc "Map"]{\label{figure_simple}Bloc "Map"}
+\includegraphics[width=0.6\textwidth]{pics/final_state/classe_SpaceCell1.PNG}
+\caption[Bloc "SpaceCell"]{\label{figure_simple}Bloc "SpaceCell"}
 \end{figure}
-\end{itemize}
 
-la classe " Player" est la classe qui va centraliser l'ensemble des informations concernant le joueur. Le joueur se voit associé des vaisseaux, des systèmes stellaires, des batiments,.. Il possède aussi diffèrent type de ressources, " Ressource", qu'il produit à chaque tours et un arbre de technologie,  "TechnologyTree" où il pourra faire des recherches pour améliorer ses vaisseaux ou bâtiments. 
+\item La classe " Player" est la classe qui va centraliser l'ensemble des informations concernant le joueur. Le joueur se voit associé des vaisseaux, des systèmes stellaires, des bâtiments,.. Il possède aussi diffèrent type de ressources, " Ressource".  \\ \\
+\\
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.8\textwidth]{pics/classe_player.PNG}
+\includegraphics[width=0.8\textwidth]{pics/final_state/classe_player1.PNG}
 \caption[Bloc "Player"]{\label{figure_simple}Bloc "Player"}
 \end{figure}
 
-Finalement nous avons la classe "State" qui contient la classe "Player" et "Map".
+\item La classe "State"  contient les classes "Player" et "SpaceCell". Cette classe donne l'état complet du jeu, la plupart des informations sont dans la classe "Player" et donc dans "Player a" et "Player b". \\
 
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.3\textwidth]{pics/classe_state.PNG}
+\includegraphics[width=0.3\textwidth]{pics/final_state/classe_state1.PNG}
 \caption[Bloc "State"]{\label{figure_simple}Bloc "State"}
 \end{figure}
 
+\item Finalement, on peut voir notre diagramme d'états entier sur la figure suivante : 
+
 \begin{figure}[!h]
-\centering
-\includegraphics[width=1\textwidth]{pics/ensemble_classe.PNG}
+\begin{center}
+\rotatebox{270}{\includegraphics[width=1.4\textwidth]{pics/final_state/ensemble_classe1.PNG}}
+\end{center}
 \caption[State diagram]{\label{figure_simple}State diagram}
 \end{figure}
+\end{itemize}
